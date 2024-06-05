@@ -27,4 +27,4 @@ namespace sym {
 
     auto generate_data(unsigned amount, GenConfig gc) -> std::vector<Process>;
 
-}
+} // namespace sym

@@ -1,6 +1,6 @@
 #include "input.hpp"
 #include <ranges>
-static auto get_val(const char *massage, unsigned  def) -> unsigned {
+auto get_val(const char *massage, unsigned int def) -> unsigned {
     std::string input;
     std::println("{} (default: {}):",massage,def);
     std::print("> ");
@@ -16,6 +16,7 @@ static auto get_val(const char *massage, unsigned  def) -> unsigned {
         }
     }
 }
+
 static auto get_generator(const char *massage,sym::GeneratorType def) -> sym::GeneratorType {
     std::string input;
     std::println("{} (default: {}):",massage,sym::get_gen_name(def));

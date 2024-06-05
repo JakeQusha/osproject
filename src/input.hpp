@@ -1,6 +1,6 @@
 #pragma once
-#include "simulator.hpp"
-#include "generator.hpp"
+#include "schduling/simulator.hpp"
+#include "schduling/generator.hpp"
 #include <print>
 #include <iostream>
 #include <functional>
@@ -21,5 +21,6 @@ auto select_function() {
     return val;
 }
 
+auto get_val(const char *massage, unsigned  def) -> unsigned;
 
 auto make_cfg() -> sym::GenConfig;

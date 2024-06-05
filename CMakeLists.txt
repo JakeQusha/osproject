@@ -4,12 +4,12 @@ project(osproject)
 set(CMAKE_CXX_STANDARD 23)
 
 add_executable(osproject src/main.cpp
-        src/process.hpp
-        src/generator.hpp
-        src/schedulers.hpp
-        src/schedulers.cpp
-        src/simulator.cpp
-        src/simulator.hpp
-        src/generator.cpp
+        src/schduling/process.hpp
+        src/schduling/generator.hpp
+        src/schduling/schedulers.hpp
+        src/schduling/schedulers.cpp
+        src/schduling/simulator.cpp
+        src/schduling/simulator.hpp
+        src/schduling/generator.cpp
         src/input.cpp
         src/input.hpp)
