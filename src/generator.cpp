@@ -54,3 +54,11 @@ auto get_gen_name(GeneratorType type) -> const char * {
     }
     return "Unknown";
 }
+
+auto page::generate_data(unsigned int amount, page::GenConfig gc) -> std::vector<Page> {
+    auto val = std::vector<Page>{};
+    for (unsigned id: std::views::iota(0u, amount)) {
+        val.emplace_back(swe(gc.page_gen, 0, gc.max_page, gc.typical_page, gc.page_deviation));
+    }
+    return val;
+}

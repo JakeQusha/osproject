@@ -27,5 +27,9 @@ template<sch::Scheduler... Sch>
 [[nodiscard]]auto get_bool(const char *massage, bool def) -> bool;
 
 [[nodiscard]]auto get_val(const char *massage, unsigned def) -> unsigned;
-
-[[nodiscard]]auto make_cfg() -> sch::GenConfig;
+namespace sch {
+    [[nodiscard]]auto make_cfg() -> sch::GenConfig;
+}
+namespace page {
+    [[nodiscard]]auto make_cfg() -> page::GenConfig;
+}

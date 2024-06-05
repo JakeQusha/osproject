@@ -1,4 +1,5 @@
 #include "simulator.hpp"
+#include "../paging/simulator.hpp"
 
 
 bool sch::is_simulation_done(const sch::SchedulingData& data) {
@@ -43,3 +44,4 @@ void sch::update_data(sch::SchedulingData &data, unsigned int time) {
     }
     data.waiting.erase(data.waiting.begin(), data.waiting.begin() + i);
 }
+

@@ -39,7 +39,7 @@ auto get_val(const char *massage, unsigned int def) -> unsigned {
     }
 }
 
-auto make_cfg() -> sch::GenConfig {
+auto sch::make_cfg() -> sch::GenConfig {
     sch::GenConfig cfg{};
     cfg.arrival_gen = get_generator("Input ARRIVAL generator type", GeneratorType::RANDOM);
     switch (cfg.arrival_gen) {
@@ -74,7 +74,6 @@ auto make_cfg() -> sch::GenConfig {
     return cfg;
 }
 
-[[nodiscard]]
 auto get_bool(const char *massage, bool def) -> bool {
     auto tmp = [&]() -> const char * {
         if (def) {
@@ -98,4 +97,22 @@ auto get_bool(const char *massage, bool def) -> bool {
             return def;
         }
     }
+}
+auto page::make_cfg() -> page::GenConfig {
+    page::GenConfig cfg{};
+    cfg.page_gen = get_generator("Input PAGE generator type", GeneratorType::RANDOM);
+    switch (cfg.page_gen) {
+        case GeneratorType::NORMAL_DIST:
+            cfg.typical_page = get_val("Input typical PAGE", 5);
+            cfg.page_deviation = get_val("Input PAGE deviation", 2);
+        case GeneratorType::RANDOM:
+            cfg.max_page = get_val("Input maximum PAGE", 10);
+            break;
+        case GeneratorType::CONSTANT:
+            cfg.typical_page = get_val("Input constant PAGE (XD?)", 5);
+            break;
+        default:
+            break;
+    }
+    return cfg;
 }

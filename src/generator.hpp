@@ -28,10 +28,17 @@ namespace sch {
     };
 
 
-    auto generate_data(unsigned amount, GenConfig gc) -> std::vector<Process>;
+    [[nodiscard]]auto generate_data(unsigned amount, GenConfig gc) -> std::vector<Process>;
 
 } // namespace sch
 
 namespace page{
-
+    struct GenConfig {
+        unsigned max_page;
+        unsigned typical_page;
+        unsigned page_deviation;
+        GeneratorType page_gen;
+    };
+    using Page = unsigned;
+    [[nodiscard]]auto generate_data(unsigned int amount, GenConfig gc) -> std::vector<Page>;
 }

@@ -17,5 +17,8 @@ add_executable(osproject src/main.cpp
         src/generator.cpp
         src/input.cpp
         src/input.hpp
-        src/paging/fakemain.cpp
-        src/paging/fakemain.h)
+        src/paging/fakemain.hpp
+        src/paging/simulator.hpp
+        src/paging/page_algorithms.cpp
+        src/paging/page_algorithms.hpp
+        src/paging/simulator.cpp)

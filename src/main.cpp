@@ -3,7 +3,7 @@
 #include "scheduling/simulator.hpp"
 #include "generator.hpp"
 #include "input.hpp"
-#include "paging/fakemain.h"
+#include "paging/fakemain.hpp"
 
 
 auto main() -> int {
@@ -11,7 +11,7 @@ auto main() -> int {
     if(get_bool("Paging instead of scheduling?", false)){
         return fake_main();
     }
-    auto org_data = sch::SchedulingData(sch::generate_data(get_val("ENTER NUMBER OF PROCESSES", 10), make_cfg()));
+    auto org_data = sch::SchedulingData(sch::generate_data(get_val("ENTER NUMBER OF PROCESSES", 10), sch::make_cfg()));
     //print data
     for (auto &p: org_data.waiting) {
         std::println("Process: {} Arrival: {} Burst: {}", p.id, p.arrival_time, p.burst_time);
@@ -38,7 +38,7 @@ auto main() -> int {
     //output to file as table
     std::ofstream file("output.txt");
 
-    file << "Process\tArrival\tBurst\tCompletion\tTurnaround\tWaiting\n";
+    file << "Process Arrival Burst Completion Turnaround Waiting\n";
     for (auto &p: data.finished) {
         file<<p.id<<" "<<p.arrival_time<<" "<<p.burst_time<<" "<<p.completion_time<<" "<<p.turnaround_time<<" "<<p.waiting_time<<"\n";
     }
