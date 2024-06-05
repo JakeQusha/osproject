@@ -12,13 +12,17 @@ auto main() -> int {
         std::println("Process: {} Arrival: {} Burst: {}", p.id, p.arrival_time, p.burst_time);
     }
     auto sim = select_sim<sym::Fcfs, sym::Sjf, sym::Lcfs, sym::Rr>();
-    std::visit([](auto &&arg) {
-        arg.setup();
+    std::visit([&](auto &&arg) {
+        arg.setup(data);
     }, sim);
     while (!sym::is_simulation_done(data)) {
         std::visit([&](auto &&arg) {
             arg.simulate(data);
         }, sim);
+    }
+    //print finished
+    for (auto &p: data.finished) {
+        std::println("Process: {} Arrival: {} Burst: {} Completion: {} Turnaround: {} Waiting: {}", p.id, p.arrival_time, p.burst_time, p.completion_time, p.turnaround_time, p.waiting_time);
     }
     return 0;
 }
