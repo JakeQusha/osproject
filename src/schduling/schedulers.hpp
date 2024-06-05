@@ -12,6 +12,7 @@ namespace sym {
     } || requires(T t, std::span<Process> awaiting, std::span<Process> finished){
         { T::name } -> std::convertible_to<const char *>;
         { t.tick(awaiting, finished) };
+        {t.reset()};
     };
 
     struct Fcfs {
@@ -33,5 +34,6 @@ namespace sym {
         static constexpr auto name = "Round Robin";
         int time;
         void tick(std::span<Process> awaiting, std::span<Process> finished);
+        void reset();
     };
 }//namespace sym

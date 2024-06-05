@@ -11,9 +11,14 @@ auto main() -> int {
     for (auto &p: data.waiting) {
         std::println("Process: {} Arrival: {} Burst: {}", p.id, p.arrival_time, p.burst_time);
     }
-    auto func = select_function<sym::Rr, sym::Fcfs, sym::Sjf, sym::Lcfs>();
+    auto sim = select_sim<sym::Fcfs, sym::Sjf, sym::Lcfs, sym::Rr>();
+    std::visit([](auto &&arg) {
+        arg.setup();
+    }, sim);
     while (!sym::is_simulation_done(data)) {
-        func(data);
+        std::visit([&](auto &&arg) {
+            arg.simulate(data);
+        }, sim);
     }
     return 0;
 }

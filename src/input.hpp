@@ -5,7 +5,7 @@
 #include <iostream>
 #include <functional>
 template<sym::Scheduler... Sch>
-auto select_function() {
+auto select_sim() {
     unsigned number=0;
     std::print("SELECT FUNCTION\n");
     ([&](){std::println("{}: {}",number++,Sch::name);}(), ...);
@@ -16,8 +16,9 @@ auto select_function() {
         std::cin>>input;
     }
     number=0;
-    auto val = sym::simulate<sym::Rr>;
-    ([&](){if(input == number++){val = sym::simulate<Sch>;}}(),...);
+    auto val = std::variant<sym::Simulator<Sch>...>{};
+    val = sym::Simulator<sym::Rr>();
+    ([&](){if(input == number++){val = sym::Simulator<Sch>();}}(),...);
     return val;
 }
 
