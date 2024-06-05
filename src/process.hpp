@@ -2,6 +2,7 @@
 
 namespace sym {
     struct Process {
+        unsigned id;
         unsigned arrival_time;
         unsigned burst_time;
         unsigned remaining_time;

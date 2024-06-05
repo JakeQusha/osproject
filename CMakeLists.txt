@@ -9,4 +9,7 @@ add_executable(osproject src/main.cpp
         src/schedulers.hpp
         src/schedulers.cpp
         src/simulator.cpp
-        src/simulator.hpp)
+        src/simulator.hpp
+        src/generator.cpp
+        src/input.cpp
+        src/input.hpp)
