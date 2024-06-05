@@ -16,21 +16,21 @@ static auto normal(unsigned int typical, unsigned int deviation, unsigned int mi
     return std::clamp(static_cast<unsigned>(std::round(distribution(gen))), min, max);
 }
 
-static auto swe(sym::GeneratorType type, unsigned int min, unsigned int max, unsigned int typical,
+static auto swe(GeneratorType type, unsigned int min, unsigned int max, unsigned int typical,
                 unsigned int deviation) -> unsigned {
     switch (type) {
-        case sym::GeneratorType::RANDOM:
+        case GeneratorType::RANDOM:
             return random(min, max);
-        case sym::GeneratorType::NORMAL_DIST:
+        case GeneratorType::NORMAL_DIST:
             return normal(typical, deviation, min, max);
-        case sym::GeneratorType::CONSTANT:
+        case GeneratorType::CONSTANT:
             return typical;
 
     }
     return 0;
 }
 
-auto sym::generate_data(unsigned amount, GenConfig gc) -> std::vector<Process> {
+auto sch::generate_data(unsigned amount, GenConfig gc) -> std::vector<Process> {
     std::vector<Process> val;
     for (unsigned id: std::views::iota(0u, amount)) {
         val.emplace_back(
@@ -41,7 +41,7 @@ auto sym::generate_data(unsigned amount, GenConfig gc) -> std::vector<Process> {
     return val;
 }
 
-auto sym::get_gen_name(sym::GeneratorType type) -> const char * {
+auto get_gen_name(GeneratorType type) -> const char * {
     switch (type) {
         case GeneratorType::RANDOM:
             return "Random";
