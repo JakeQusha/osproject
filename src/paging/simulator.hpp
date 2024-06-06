@@ -12,11 +12,11 @@ namespace page{
     public:
         void setup(PagingData &data){
             setup_data(data);
-            t.reset();
+            t.reset(data);
         }
         void simulate(PagingData &data){
-            if (is_simulation_done(data)) return;
             t.tick(data);
+            data.pages.pop_back();
         }
     };
 }

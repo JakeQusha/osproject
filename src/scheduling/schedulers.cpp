@@ -40,10 +40,11 @@ void sch::Rr::tick(std::span<Process> awaiting) {
 }
 
 void sch::Rr::reset() {
-    std::string a;
+
     time = 0;
     current_job =0;
     //susy fix
+    std::string a;
     std::getline(std::cin, a);
     //
     quantum = get_val("Enter quantum",4);

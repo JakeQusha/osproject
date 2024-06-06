@@ -3,10 +3,7 @@
 
 
 bool sch::is_simulation_done(const sch::SchedulingData& data) {
-    if(data.waiting.empty() && data.current.empty()){
-        return true;
-    }
-    return false;
+    return data.waiting.empty() && data.current.empty();
 }
 
 void sch::setup_data(sch::SchedulingData &data) {

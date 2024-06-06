@@ -75,14 +75,8 @@ auto sch::make_cfg() -> sch::GenConfig {
 }
 
 auto get_bool(const char *massage, bool def) -> bool {
-    auto tmp = [&]() -> const char * {
-        if (def) {
-            return "[Y/n]";
-        }
-        return "[y/N]";
-    };
     std::string input;
-    std::println("{} {}:", massage, tmp());
+    std::println("{} {}:", massage, (def ? "[Y/n]" : "[y/N]"));
     std::print("> ");
     std::getline(std::cin, input);
     if (input.empty()) {
@@ -98,6 +92,27 @@ auto get_bool(const char *massage, bool def) -> bool {
         }
     }
 }
+
+auto get_bool(const char *massage, const  char true_op, const char false_op, bool def) -> bool {
+    std::string input;
+    std::println("{} [{}/{}]:", massage,(char)(def? std::toupper(true_op) : std::tolower(true_op)),(char)
+    (def? std::tolower(false_op) : std::toupper(false_op)) );
+    std::print("> ");
+    std::getline(std::cin, input);
+    if (input.empty()) {
+        return def;
+    } else {
+        if (input.front() == std::toupper(true_op) || input.front() == std::tolower(true_op)) {
+            return true;
+        } else if (input.front() == std::toupper(false_op) || input.front() == std::tolower(false_op)) {
+            return false;
+        } else {
+            std::println("Invalid input. Falling back to default.");
+            return def;
+        }
+    }
+}
+
 auto page::make_cfg() -> page::GenConfig {
     page::GenConfig cfg{};
     cfg.page_gen = get_generator("Input PAGE generator type", GeneratorType::RANDOM);

@@ -8,7 +8,7 @@
 
 auto main() -> int {
     std::print("WELCOME\n");
-    if(get_bool("Paging instead of scheduling?", false)){
+    if(!get_bool("Scheduling/Paging Algorithms",'S','P', true)){
         return fake_main();
     }
     auto org_data = sch::SchedulingData(sch::generate_data(get_val("ENTER NUMBER OF PROCESSES", 10), sch::make_cfg()));
@@ -18,7 +18,7 @@ auto main() -> int {
     }
     reset:
     auto data = sch::SchedulingData(org_data);
-    auto sim = select_sim<sch::Fcfs, sch::Sjf, sch::Lcfs, sch::Rr, sch::SjfPreemptive>();
+    auto sim = sch::select_sim<sch::Fcfs, sch::Sjf, sch::Lcfs, sch::Rr, sch::SjfPreemptive>();
     std::visit([&](auto &&arg) {
         arg.setup(data);
     }, sim);
