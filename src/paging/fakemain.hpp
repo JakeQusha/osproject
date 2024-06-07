@@ -9,6 +9,7 @@ inline auto fake_main() -> int {
     for (auto &p: org_data.pages) {
         std::print("{} ", p);
     }
+    std::print("\n");
     reset:
     auto data = page::PagingData(org_data);
     auto sim = page::select_page_algorithm<page::Fifo, page::Lfu,page::Lru>();

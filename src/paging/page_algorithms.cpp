@@ -37,7 +37,6 @@ void page::Lfu::tick(page::PagingData &pd) {
         std::print("{} ", f);
     }
     std::print(" Freq: ");
-    //frequency
     for(auto &f: pd.frames){
         std::print("{} ", frequency[f]);
     }
