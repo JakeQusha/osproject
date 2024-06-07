@@ -29,21 +29,23 @@ auto main() -> int {
     }
     //print finished
     for (auto &p: data.finished) {
-        std::println("Process: {} Arrival: {} Burst: {} Completion: {} Turnaround: {} Waiting: {}", p.id,
-                     p.arrival_time, p.burst_time, p.completion_time, p.turnaround_time, p.waiting_time);
+        std::println("Process: {} Arrival: {} Burst: {} Completion: {} Turnaround: {} Waiting: {}, Response: {}", p.id,
+                     p.arrival_time, p.burst_time, p.completion_time, p.turnaround_time, p.waiting_time,p.response_time);
     }
     //print average
     std::println("Average turnaround time: {}", sch::average_turnaround(data.finished));
     std::println("Average waiting time: {}", sch::average_waiting(data.finished));
+    std::println("Average response time: {}", sch::average_response(data.finished));
     //output to file as table
     std::ofstream file("output.txt");
 
     file << "Process Arrival Burst Completion Turnaround Waiting\n";
     for (auto &p: data.finished) {
-        file<<p.id<<" "<<p.arrival_time<<" "<<p.burst_time<<" "<<p.completion_time<<" "<<p.turnaround_time<<" "<<p.waiting_time<<"\n";
+        file<<p.id<<" "<<p.arrival_time<<" "<<p.burst_time<<" "<<p.completion_time<<" "<<p.turnaround_time<<" "<<p.waiting_time<<p.response_time<<"\n";
     }
     file << "Average turnaround time: " << sch::average_turnaround(data.finished) << "\n";
     file << "Average waiting time: " << sch::average_waiting(data.finished) << "\n";
+    file << "Average response time: " << sch::average_response(data.finished) << "\n";
     if(!get_bool("Again?", true)){
         return 0;
     }

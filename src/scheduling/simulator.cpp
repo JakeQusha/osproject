@@ -23,6 +23,10 @@ void sch::setup_data(sch::SchedulingData &data) {
 
 void sch::update_data(sch::SchedulingData &data, unsigned int time) {
     for (int i = 0; i < data.current.size(); ++i) {
+        if(data.current[i].has_started==1){
+            data.current[i].remaining_time=time-data.current[i].arrival_time;
+            data.current[i].has_started=69;
+        }
         if(data.current[i].remaining_time == 0){
             data.current[i].completion_time = time;
             data.current[i].turnaround_time = data.current[i].completion_time - data.current[i].arrival_time;

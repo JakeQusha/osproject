@@ -9,6 +9,9 @@ void sch::Fcfs::tick(std::span<Process> awaiting) {
         return;
     }
     awaiting.front().remaining_time--;
+    if(!awaiting.front().has_started){
+        awaiting.front().has_started=1;
+    }
     for(int i =1;i<awaiting.size();i++){
         awaiting.at(i).waiting_time++;
     }
@@ -22,6 +25,9 @@ void sch::Rr::tick(std::span<Process> awaiting) {
         p.waiting_time++;
     }
     awaiting.at(current_job).remaining_time--;
+    if(!awaiting.at(current_job).has_started){
+        awaiting.at(current_job).has_started=1;
+    }
     awaiting.at(current_job).waiting_time--;
     time++;
     if(awaiting.at(current_job).remaining_time==0){
@@ -55,6 +61,9 @@ void sch::Lcfs::tick(std::span<Process> awaiting) {
         return;
     }
     awaiting.back().remaining_time--;
+    if(!awaiting.back().has_started){
+        awaiting.back().has_started=1;
+    }
     for(int i =0;i<awaiting.size()-1;i++){
         awaiting.at(i).waiting_time++;
     }
@@ -69,6 +78,9 @@ void sch::Sjf::tick(std::span<Process> awaiting) {
             p.waiting_time++;
         }
         awaiting.at(current_job).remaining_time--;
+        if(!awaiting.at(current_job).has_started){
+            awaiting.at(current_job).has_started=1;
+        }
         awaiting.at(current_job).waiting_time--;
         if(awaiting.at(current_job).remaining_time==0){
             current_job=-1;
@@ -107,4 +119,7 @@ void sch::SjfPreemptive::tick(std::span<Process> awaiting) {
     }
     awaiting.at(min.first).waiting_time--;
     awaiting.at(min.first).remaining_time--;
+    if(!awaiting.at(min.first).has_started){
+        awaiting.at(min.first).has_started=1;
+    }
 }
