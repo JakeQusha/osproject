@@ -7,6 +7,8 @@ enum class GeneratorType {
     RANDOM,
     NORMAL_DIST,
     CONSTANT,
+    TWO_VAL,
+    LINEAR,
     CNT
 };
 
@@ -32,7 +34,7 @@ namespace sch {
 
 } // namespace sch
 
-namespace page{
+namespace page {
     struct GenConfig {
         unsigned max_page;
         unsigned typical_page;
@@ -40,5 +42,6 @@ namespace page{
         GeneratorType page_gen;
     };
     using Page = unsigned;
+
     [[nodiscard]]auto generate_data(unsigned int amount, GenConfig gc) -> std::vector<Page>;
 }

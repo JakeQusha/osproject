@@ -12,7 +12,7 @@ namespace sch {
     } || requires(T t, std::span<Process> awaiting){
         { T::name } -> std::convertible_to<const char *>;
         { t.tick(awaiting) };
-        {t.reset()};
+        { t.reset() };
     };
 
     struct Fcfs {
@@ -20,28 +20,36 @@ namespace sch {
 
         static void tick(std::span<Process> awaiting);
     };
+
     struct Lcfs {
         static constexpr auto name = "Last Come First Serve Preemptive";
 
         static void tick(std::span<Process> awaiting);
     };
+
     struct Sjf {
         static constexpr auto name = "Shortest job first Non-Preemptive";
         int current_job;
+
         void tick(std::span<Process> awaiting);
+
         void reset();
     };
+
     struct SjfPreemptive {
         static constexpr auto name = "Shortest job first Preemptive";
 
         static void tick(std::span<Process> awaiting);
     };
+
     struct Rr {
         static constexpr auto name = "Round Robin";
         int time;
         unsigned quantum;
         unsigned current_job;
+
         void tick(std::span<Process> awaiting);
+
         void reset();
     };
 }//namespace sch

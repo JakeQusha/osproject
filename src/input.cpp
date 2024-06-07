@@ -53,6 +53,13 @@ auto sch::make_cfg() -> sch::GenConfig {
         case GeneratorType::CONSTANT:
             cfg.typical_arrival = get_val("Input constant ARRIVAL time", 5);
             break;
+        case GeneratorType::TWO_VAL:
+            cfg.min_arrival_time = get_val("Input first ARRIVAL time", 0);
+            cfg.max_arrival_time = get_val("Input second ARRIVAL time", 10);
+            break;
+        case GeneratorType::LINEAR:
+            cfg.max_arrival_time = get_val("Input max ARRIVAL time", 1000);
+            break;
         default:
             break;
     }
@@ -67,6 +74,13 @@ auto sch::make_cfg() -> sch::GenConfig {
             break;
         case GeneratorType::CONSTANT:
             cfg.typical_burst = get_val("Input constant BURST time", 5);
+            break;
+        case GeneratorType::TWO_VAL:
+            cfg.min_burst_time = get_val("Input first BURST time", 1);
+            cfg.max_burst_time = get_val("Input second BURST time", 10);
+            break;
+        case GeneratorType::LINEAR:
+            cfg.max_burst_time = get_val("Input max BURST time", 1000);
             break;
         default:
             break;
@@ -93,10 +107,10 @@ auto get_bool(const char *massage, bool def) -> bool {
     }
 }
 
-auto get_bool(const char *massage, const  char true_op, const char false_op, bool def) -> bool {
+auto get_bool(const char *massage, const char true_op, const char false_op, bool def) -> bool {
     std::string input;
-    std::println("{} [{}/{}]:", massage,(char)(def? std::toupper(true_op) : std::tolower(true_op)),(char)
-    (def? std::tolower(false_op) : std::toupper(false_op)) );
+    std::println("{} [{}/{}]:", massage, (char) (def ? std::toupper(true_op) : std::tolower(true_op)), (char)
+            (def ? std::tolower(false_op) : std::toupper(false_op)));
     std::print("> ");
     std::getline(std::cin, input);
     if (input.empty()) {

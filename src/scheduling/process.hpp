@@ -12,25 +12,28 @@ namespace sch {
         unsigned response_time;
         uint8_t has_started;
     };
-    inline auto average_turnaround(std::span<Process> processes) -> double{
+
+    inline auto average_turnaround(std::span<Process> processes) -> double {
         double sum = 0;
-        for(auto &p : processes){
-            sum+=p.turnaround_time;
+        for (auto &p: processes) {
+            sum += p.turnaround_time;
         }
-        return sum/(double)processes.size();
+        return sum / (double) processes.size();
     }
-    inline auto average_waiting(std::span<Process> processes) -> double{
+
+    inline auto average_waiting(std::span<Process> processes) -> double {
         double sum = 0;
-        for(auto &p : processes){
-            sum+=p.waiting_time;
+        for (auto &p: processes) {
+            sum += p.waiting_time;
         }
-        return sum/(double)processes.size();
+        return sum / (double) processes.size();
     }
-    inline auto average_response(std::span<Process> processes) -> double{
+
+    inline auto average_response(std::span<Process> processes) -> double {
         double sum = 0;
-        for(auto &p : processes){
-            sum+=p.response_time;
+        for (auto &p: processes) {
+            sum += p.response_time;
         }
-        return sum/(double)processes.size();
+        return sum / (double) processes.size();
     }
 } //namespace sch

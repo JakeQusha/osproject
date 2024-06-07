@@ -19,16 +19,22 @@ void sch::setup_data(sch::SchedulingData &data) {
         process.waiting_time=0;
         process.completion_time=0;
     }
+#ifdef DEBUG
+    //print data
+    for (auto &p: data.waiting) {
+        std::println("Process: {} Arrival: {} Burst: {}", p.id, p.arrival_time, p.burst_time);
+    }
+#endif
 }
 
 void sch::update_data(sch::SchedulingData &data, unsigned int time) {
     for (int i = 0; i < data.current.size(); ++i) {
         if(data.current[i].has_started==1){
-            data.current[i].remaining_time=time-data.current[i].arrival_time;
+            data.current[i].response_time=time-data.current[i].arrival_time-2;
             data.current[i].has_started=69;
         }
         if(data.current[i].remaining_time == 0){
-            data.current[i].completion_time = time;
+            data.current[i].completion_time = time-1;
             data.current[i].turnaround_time = data.current[i].completion_time - data.current[i].arrival_time;
             data.finished.push_back(data.current[i]);
             data.current.erase(data.current.begin() + i);

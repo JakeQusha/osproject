@@ -56,7 +56,7 @@ void page::Lfu::tick(page::PagingData &pd) {
 }
 
 void page::Lfu::reset([[maybe_unused]]const page::PagingData &pd) {
-    frequency.resize(pd.max_page + 1,0);
+    frequency.resize(pd.max_page + 1, 0);
 }
 
 void page::Lru::tick(page::PagingData &pd) {
@@ -74,18 +74,18 @@ void page::Lru::tick(page::PagingData &pd) {
         std::print("{} ", f);
     }
 #endif
-    for(auto &f: last_used){
+    for (auto &f: last_used) {
         f++;
     }
     auto pos = std::find(pd.frames.begin(), pd.frames.end(), pd.pages.back());
-    if ( pos != pd.frames.end()) {
-        last_used.at(std::distance(pd.frames.begin(), pos))=0;
+    if (pos != pd.frames.end()) {
+        last_used.at(std::distance(pd.frames.begin(), pos)) = 0;
         return;
     }
     pd.page_faults++;
     if (pd.frames.size() < pd.frames_capacity) {
         pd.frames.push_back(pd.pages.back());
-        last_used.at(std::distance(pd.frames.begin(), pd.frames.end()-1))=0;
+        last_used.at(std::distance(pd.frames.begin(), pd.frames.end() - 1)) = 0;
         return;
     }
     auto it = std::max_element(last_used.begin(), last_used.end());
@@ -95,5 +95,5 @@ void page::Lru::tick(page::PagingData &pd) {
 
 
 void page::Lru::reset([[maybe_unused]]const page::PagingData &pd) {
-    last_used.resize(pd.frames_capacity,0);
+    last_used.resize(pd.frames_capacity, 0);
 }

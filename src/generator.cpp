@@ -18,6 +18,8 @@ static auto normal(unsigned int typical, unsigned int deviation, unsigned int mi
 
 static auto swe(GeneratorType type, unsigned int min, unsigned int max, unsigned int typical,
                 unsigned int deviation) -> unsigned {
+    static bool state = false;
+    static unsigned int last = 0;
     switch (type) {
         case GeneratorType::RANDOM:
             return random(min, max);
@@ -25,7 +27,11 @@ static auto swe(GeneratorType type, unsigned int min, unsigned int max, unsigned
             return normal(typical, deviation, min, max);
         case GeneratorType::CONSTANT:
             return typical;
-
+        case GeneratorType::TWO_VAL:
+            state = !state;
+            return state ? min : max;
+        case GeneratorType::LINEAR:
+            return last++%(max+1);
     }
     return 0;
 }
@@ -49,6 +55,10 @@ auto get_gen_name(GeneratorType type) -> const char * {
             return "Normal Distribution";
         case GeneratorType::CONSTANT:
             return "Constant";
+        case GeneratorType::TWO_VAL:
+            return "Two Values";
+        case GeneratorType::LINEAR:
+            return "Linear";
         case GeneratorType::CNT:
             break;
     }
